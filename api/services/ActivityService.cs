@@ -17,12 +17,17 @@ namespace timetrackerAPI.services
         }
 
         public Activity[] GetAllActivities(){
-            activities.ForEach(activity => {
+        /*    activities.ForEach(activity =>
+            {
                 List<TimePassedActivity> pt = TimePassedActivityService.GetTimePassedByActivityID(activity.ID).ToList();
                 pt.ForEach(x => activity.AddActivityTime(x));
             });
-            
+
             return activities.ToArray();
+        */
+
+
+            return [];
         }
 
     }

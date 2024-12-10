@@ -27,6 +27,11 @@ namespace timetrackerAPI.services
             return this.TimePassedActivity.Where(x => x.IdActivity == activityID).ToArray();
         }
 
+        public void AddTimePassedByActivity(TimePassedActivity timePassedActivity)
+        {
+            this.TimePassedActivity.Add(timePassedActivity);
+        }
+
     }
 
 }

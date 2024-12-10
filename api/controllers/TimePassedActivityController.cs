@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using timetrackerAPI.services;
-using timetrackerAPI.mdoels;
+using timetrackerAPI.models;
 
 namespace timetrackerAPI.controllers
 {
@@ -28,8 +28,19 @@ namespace timetrackerAPI.controllers
         }
 
         [HttpPost("TimePassedActivity")]
-        public IActioNResult AddTimePassedByActivity(object obj)
+        public IActionResult AddTimePassedByActivity(object obj)
         {
+            TimePassedActivity activity = new TimePassedActivity();
+            /*TimePassedActivity activity = new TimePassedActivity()
+            {
+                ID = obj.id,
+                Date = obj.date,
+                Begin = new Time() { Hours = obj.begin.hours, Minutes = obj.begin.minutes },
+                End = new Time() { Minutes = obj.end.hours, Hours = obj.end.minutes },
+                IdActivity = obj.idActivity
+            };*/
+            this.timePassedService.AddTimePassedByActivity(activity);
+            return Ok();
             // Attendus : begin (Time), end (Time), date, idActivity
         }
     }

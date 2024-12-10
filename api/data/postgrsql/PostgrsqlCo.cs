@@ -1,44 +1,51 @@
-using System.Collections.Generic;
 using Npgsql;  
 using NpgsqlTypes;
+using System.Data;
 
 namespace timetrackerAPI.data.postgrsql
 {
     public class PostgrsqlCo : ISQL
     {
         private const string CONX = "Server=localhost;Port=5432;Database=timetracker;User Id=damien;Password=damien;";
-        private NpgsqlCommand myCmd = null;
         private NpgsqlConnection connection = null;
 
         public PostgrsqlCo()
         {
-            this.connection = new NpgsqlConnection(this.CONX);
+            this.connection = new NpgsqlConnection(CONX);
         }
         
         public void Open()
         {
             this.connection.Open();
-            MyCmd = new NpgsqlCommand(insert, MyCnx);
-            MyCmd.Parameters.Add(new NpgsqlParameter("nom", NpgsqlDbType.Varchar)).Value = nom;
-            MyCmd.ExecuteNonQuery(); 
         }
 
-        public void Insert(string request, Dictionary<string, string> data = null)
+        /// <summary>
+        /// Pour tout insert ou update ou delete de la base de donnée
+        /// </summary>
+        public void Execute(string request, Dictionary<string,string> parameters = null)
         {
-            List<string> result = new List<string>();
             this.Open();
-            this.myCmd = new NpgsqlCommand(request, this.connection);
 
-            foreach(KeyValuePair<string, string> d in data)
-            {
-                NpgsqlDbType dataType = NpgsqlDbType.Varchar;
-                // TO:DO -> Faire un case of avec typeof pour gérer le type de NpgsqlDbType
-                this.myCmd.Parameters.Add(new NpgsqlParameter(d.Key, dataType)).Value = d.Value;
-            }
+            NpgsqlCommand myCmd = new NpgsqlCommand(request, this.connection);
+            this.AddParameters(myCmd, parameters);
 
-            this.myCmd.ExecuteNonQuery();
+            myCmd.ExecuteNonQuery();
             this.Close();
-            return result;
+        }
+
+         public DataTable Select(string request, Dictionary<string,string> parameters = null)
+        {
+            DataTable MyData = new DataTable();
+            this.Open();
+
+            NpgsqlCommand myCmd = new NpgsqlCommand(request, this.connection);
+            this.AddParameters(myCmd, parameters);
+
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(myCmd);
+            da.Fill(MyData);
+
+            this.Close();
+            return MyData;
         }
 
         public void Close()
@@ -49,11 +56,21 @@ namespace timetrackerAPI.data.postgrsql
         public bool TestConnection()
         {
             this.Open();
-            string insert = "SELECT version();";
-            this.Execute(insert);
+            this.Select("SELECT version();");
             this.Close();
-
             return true;
+        }
+
+        /// <summary>
+        /// Gère injection sql
+        /// </summary>
+        private void AddParameters(NpgsqlCommand myCmd, Dictionary<string, string> parameters)
+        {
+            foreach(KeyValuePair<string, string> param in parameters) // TO:DO -> Faire un case of avec typeof pour gérer le type de NpgsqlDbType
+            {
+                NpgsqlDbType dataType = NpgsqlDbType.Varchar;
+                myCmd.Parameters.Add(new NpgsqlParameter(param.Key, dataType)).Value = param.Value;
+            }
         }
     }
 }

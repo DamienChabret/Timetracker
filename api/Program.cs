@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using timetrackerAPI.data;
+using timetrackerAPI.data.sqlite;
 using timetrackerAPI.models;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
