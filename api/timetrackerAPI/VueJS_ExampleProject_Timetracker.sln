@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{9C7A61FB-44D9-4433-833C-F25FC7375461}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "timetrackerAPI", "api\timetrackerAPI\timetrackerAPI.csproj", "{9FAB4BF0-DCA3-411A-8222-E2661897086C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FAB4BF0-DCA3-411A-8222-E2661897086C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FAB4BF0-DCA3-411A-8222-E2661897086C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FAB4BF0-DCA3-411A-8222-E2661897086C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FAB4BF0-DCA3-411A-8222-E2661897086C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9FAB4BF0-DCA3-411A-8222-E2661897086C} = {9C7A61FB-44D9-4433-833C-F25FC7375461}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D51F625-45E6-40D3-B213-A7DAFE02307E}
+	EndGlobalSection
+EndGlobal
